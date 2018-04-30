@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
                 url = "http://www.example.com/articles/123",
                 user = User(id="456",name="たろう",profileImageUrl = "")))
 
-
+  
 
         setContentView(articleView)
     }
