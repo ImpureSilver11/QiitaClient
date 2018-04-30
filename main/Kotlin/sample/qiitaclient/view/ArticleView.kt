@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import sample.qiitaclient.R
 import sample.qiitaclient.model.Article
+import sample.qiitaclient.bindView
 
 class ArticleView : FrameLayout{
 
@@ -27,22 +28,39 @@ class ArticleView : FrameLayout{
                 defStyleAttr: Int,
                 defStyleRes:Int) : super(context, attrs, defStyleAttr,defStyleRes)
 
-    var profileImageView: ImageView? =null
+//    null許容型の表現
+//    var profileImageView: ImageView? = null
+//var titleTextView:TextView? = null
+//    var userNameTectView :TextView?=null
+//    lazyを用いた表現
+//    val profileImageView: ImageView by lazy {
+//    findViewById(R.id.profile_image_view) as ImageView
+//}
+//    val titleTextView: TextView by lazy {
+//        findViewById(R.id.title_text_view) as TextView
+//    }
+//
+//    val userNameTextView: TextView by lazy {
+//        findViewById(R.id.user_name_text_view) as TextView
+//    }
 
-    var titleTextView:TextView? = null
+//    拡張関数により、lazyをsample.qiitaclient.extensionsのbindViewで記述している
+    val profileImageView: ImageView by bindView(R.id.profile_image_view)
+    val titleTextView: TextView by bindView(R.id.title_text_view)
+    val userNameTextView: TextView by bindView(R.id.user_name_text_view)
 
-    var userNameTectView :TextView?=null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_article,this)
-        profileImageView = findViewById(R.id.profile_image_view) as ImageView
-        titleTextView = findViewById(R.id.title_text_view) as TextView
-        userNameTectView = findViewById(R.id.user_name_text_view) as TextView
+//        'null許容型を使った表現
+//        profileImageView = findViewById(R.id.profile_image_view) as ImageView
+//        titleTextView = findViewById(R.id.title_text_view) as TextView
+//        userNameTectView = findViewById(R.id.user_name_text_view) as TextView
     }
 
     fun setArticle(article: Article){
         titleTextView?.text = article.title
-        userNameTectView?.text = article.user.name
+        userNameTextView?.text = article.user.name
 //        TODO　プロフィール画像をセット
 
         profileImageView?.setBackgroundColor(Color.RED)
