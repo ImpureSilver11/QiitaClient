@@ -3,6 +3,8 @@ package sample.qiitaclient
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DialogTitle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ListView
 import sample.qiitaclient.model.Article
 import sample.qiitaclient.model.User
@@ -21,7 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         val listView: ListView = findViewById(R.id.list_view) as ListView
         listView.adapter = listAdapter
-
+        listView .setOnItemClickListener{ AdapterView, View, position, id ->
+            val article =listAdapter .articles[position]
+            ArticleActivity.intent(this,article).let { startActivity(it) }
+        }
 //      Articleオブジェクトの生成
 //        val articleView = ArticleView(applicationContext)
 //
