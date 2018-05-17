@@ -6,6 +6,11 @@ import android.support.v7.widget.DialogTitle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import sample.qiitaclient.client.ArticleClient
 import sample.qiitaclient.model.Article
 import sample.qiitaclient.model.User
 import sample.qiitaclient.view.ArticleView
@@ -15,6 +20,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gson = GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create()
+        val retrofit = Retrofit.Builder()
+                .baseUrl("https://qiita.com")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+        val articleClient = retrofit.create(ArticleClient::class.java)
+        
 
         setContentView(R.layout.activity_main)
         val listAdapter = ArticleListAdapter(applicationContext)
