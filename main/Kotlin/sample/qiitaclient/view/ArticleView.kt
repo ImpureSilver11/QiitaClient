@@ -2,15 +2,15 @@ package sample.qiitaclient.view
 
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import sample.qiitaclient.R
-import sample.qiitaclient.model.Article
 import sample.qiitaclient.bindView
+import sample.qiitaclient.model.Article
 
 class ArticleView : FrameLayout{
 
@@ -59,11 +59,10 @@ class ArticleView : FrameLayout{
     }
 
     fun setArticle(article: Article){
-        titleTextView?.text = article.title
-        userNameTextView?.text = article.user.name
-//        TODO　プロフィール画像をセット
-
-        profileImageView?.setBackgroundColor(Color.RED)
+        titleTextView.text = article.title
+        userNameTextView.text = article.user.name
+        Glide.with(context).load(article.user.profileImageUrl).into(profileImageView)
+//        profileImageView?.setBackgroundColor(Color.RED)
 
     }
 }

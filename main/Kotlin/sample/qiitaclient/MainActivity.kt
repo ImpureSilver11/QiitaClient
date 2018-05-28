@@ -1,12 +1,10 @@
 package sample.qiitaclient
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.ProgressBar
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -16,7 +14,6 @@ import rx.schedulers.Schedulers
 import sample.qiitaclient.client.ArticleClient
 import sample.qiitaclient.model.Article
 import sample.qiitaclient.model.User
-import sample.qiitaclient.view.ArticleView
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,9 +51,9 @@ class MainActivity : AppCompatActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         queryEditText.text.clear()
-                        listAdapter.articles=it
+                        listAdapter.articles = it
                         listAdapter.notifyDataSetChanged()
-                    }, {
+                    },{
                         toast("エラー: $it")
                     })
         }
